@@ -1,30 +1,38 @@
 package zowe.client.sdk.teamconfig;
-import org.json.*;
+
+import com.starxg.keytar.KeytarException;
 import org.json.JSONObject;
 
 public class KeyTarConfig {
 
-    private Ikey key;
+    private IKey key;
+    private String configLocation;
+    private String userName;
+    private String password;
 
-    public String configLocation;
-    public String userName;
-    public String passWord;
-
-    public KeyTarConfig(Ikey key){
+    public KeyTarConfig(IKey key) {
         this.key = key;
     }
 
-    public void parseKey(String keyValue){
-        JSONObject obj = new JSONObject(keyValue);
-        configLocation = obj.toString();
+    public void parseKey() throws KeytarException {
+        key.processKey();
+        JSONObject obj = new JSONObject(key.getKeyValue());
 
-        JSONObject profiles = obj.getJSONObject("profiles");
+        // you need to perform obj.get on the field values from the JSON string of keyValue
+        // and assign them to configLocation, userName, and password
 
-//        JSONObject zosmf = profiles.getJSONObject(String.valueOf(ProfileType.ZOSMF).toLowerCase());
-//        String port = zosmf.getJSONObject("properties").getString("port");
-
-        JSONObject base = profiles.getJSONObject(String.valueOf(ProfileType.BASE).toLowerCase());
-        userName = base.getJSONObject("secure").getString("user");
-        passWord = base.getJSONObject("secure").getString("password");
     }
+
+    public String getConfigLocation() {
+        return configLocation;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
 }
