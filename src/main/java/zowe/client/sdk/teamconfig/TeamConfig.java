@@ -53,7 +53,7 @@ public class TeamConfig {
             this.host = tempProfile2.getJSONObject("host").getString("port");
         }
 
-        // might be better to return profile object instead of connection
+        // FRANK G - might be better to return profile object instead of connection
         // have the use crete the connection based on the information within profile returned
         // is better as the method naming same get default team configuration by profile type.
         ZOSConnection connection = new ZOSConnection(host, port, userName, password);
@@ -64,9 +64,21 @@ public class TeamConfig {
 
     private void parseJson() throws ParseException {
 
+        // FRANK G - use this.configLocation to read the zowe.config.json from the disk..
+        // write java code to read the file from configLocation which as an example will be a string value
+        // of "C:\\Users\\fg892105\\IdeaProjects\\ZoweCCSSVCSymptomsReport\\zowe.config.json"
+        // read the file as one string - this will be in JSON format - convert the String to a
+        // JSONOBJECT for example:
+        // String str = "{\"name\": \"Sam Smith\", \"technology\": \"Python\"}";
+        // JSONObject json = new JSONObject(str);
+        // or
+        // JSONObject object = (JSONObject) parser.parse(str);
+
+
         partitionList = new ArrayList<>();
 
         JSONParser parser = new JSONParser();
+        // FRANK G - using  parser.parse(this.configLocation); wont work see above..
         JSONObject object = (JSONObject) parser.parse(this.configLocation);
         JSONObject embedded_profiles = object.getJSONObject("profiles");
 

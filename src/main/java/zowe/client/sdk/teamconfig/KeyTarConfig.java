@@ -18,8 +18,18 @@ public class KeyTarConfig {
         key.processKey();
         JSONObject obj = new JSONObject(key.getKeyValue());
 
-        // you need to perform obj.get on the field values from the JSON string of keyValue
+        // FRANK G - you need to perform obj.get on the field values from the JSON string of keyValue
         // and assign them to configLocation, userName, and password
+        // the following JSON string is what the getKeyValue will return an example...
+//        {
+//            "C:\\Users\\fg892105\\IdeaProjects\\ZoweCCSSVCSymptomsReport\\zowe.config.json": {
+//            "profiles.base.properties.user": "fg892105",
+//            "profiles.base.properties.password": "javasdk1"
+//            }
+//        }
+        // "C:\\Users\\fg892105\\IdeaProjects\\ZoweCCSSVCSymptomsReport\\zowe.config.json" is tricky as it is not
+        // a static key this can be different value.. so think how to get this value.. 
+        // parse the JSON String above and populate configLocation, userName, and password
 
     }
 
