@@ -76,7 +76,7 @@ public class TeamConfig {
             int partition_num = a + 1;
             String partitionStr = "lpar" + partition_num;
             if (embedded_profiles.has(partitionStr)) {
-                JSONObject parObject = embedded_profiles.getJSONObject(partition);
+                JSONObject parObject = embedded_profiles.getJSONObject(partitionStr);
                 // for each partition, find the profiles inside it
                 Partition partition = new Partition();
                 for (int b = 0; b < parObject.length(); b++) {
