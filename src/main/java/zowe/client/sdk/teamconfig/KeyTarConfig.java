@@ -1,7 +1,10 @@
 package zowe.client.sdk.teamconfig;
 
 import com.starxg.keytar.KeytarException;
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.Iterator;
 
 public class KeyTarConfig {
 
@@ -31,6 +34,16 @@ public class KeyTarConfig {
         // a static key this can be different value.. so think how to get this value.. 
         // parse the JSON String above and populate configLocation, userName, and password
 
+        Iterator x = obj.keys();
+        while (x.hasNext()){
+            String key = (String) x.next();
+            if (key.contains("zowe.config.json")){
+                this.configLocation = key;
+            }
+        }
+
+        this.userName = obj.getString("profiles.base.properties.user");
+        this.password = obj.getString("profiles.base.properties.password");
     }
 
     public String getConfigLocation() {
